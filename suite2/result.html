@@ -32,26 +32,10 @@
   <div id="sandbox" style="display:none"></div>
 
   <script>
-    // fetch tracker id
-    var sb = document.getElementById("sandbox");
-    var if1 = document.createElement("iframe");
-    if1.src = "http://trackerc.com/c/result.html";
-
-    sb.appendChild(if1);
-
-    /*
     var app = angular.module('myApp', []);
     app.controller('customersCtrl', function($scope, $http) {
       var url = "http://api.testbed.com/test/record/";
-      $http.jsonp(url+"?jsonp=JSON_CALLBACK"+"&filter_name="+tracker_name+"&filter_uid="+tracker_id).success(function(data) {
-        $scope.records = data.rows;
-      });
-    });
-    */
-    function updateModel()
-    var app = angular.module('myApp', []);
-    app.controller('customersCtrl', function($scope, $http) {
-      var url = "http://api.testbed.com/test/record/";
+      var tracker_id = window.name; // use hack to set tracker id in tracker's domain
       $http.jsonp(url+"?jsonp=JSON_CALLBACK"+"&filter_name="+tracker_name+"&filter_uid="+tracker_id).success(function(data) {
         $scope.records = data.rows;
       });
