@@ -9,7 +9,7 @@
 </head>
 <body ng-app="myApp">
   <div class="container" ng-controller="customersCtrl">
-    <h3>Tests</h3>
+    <h3>Testbed</h3>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -26,6 +26,9 @@
       </tbody>
     </table>
   </div>
+  <div class="container" ng-controller="customersCtrl">
+    <button class="btn" ng-click="clearall()">Clear Tracking History</button>
+  </div>
 
   <script>
     var app = angular.module('myApp', []);
@@ -35,6 +38,13 @@
       $http.jsonp(url+"?jsonp=JSON_CALLBACK").success(function(data) {
         $scope.records = data.rows;
       });
+
+      // clear history
+      $scope.clearall = function() {
+        // $scope.records.slice(0, $scope.records.lengthasd);
+        // $scope.records.splice( 0, 1 );
+        $http.get('http://testbed.com/removerecordsall');
+      }
     });
   </script>
 </body>

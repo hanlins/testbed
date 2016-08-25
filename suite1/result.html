@@ -27,9 +27,6 @@
       </tbody>
     </table>
   </div>
-  <div class="container" ng-controller="customersCtrl">
-    <button class="btn" ng-click="clearall()">clear history</button>
-  </div>
   <script>
     var app = angular.module('myApp', []);
     app.controller('customersCtrl', function($scope, $http) {
@@ -37,12 +34,6 @@
       $http.jsonp(url+"?jsonp=JSON_CALLBACK"+"&filter_name="+tracker_name+"&filter_uid="+tracker_id).success(function(data) {
         $scope.records = data.rows;
       });
-      // clear history
-      $scope.clearall = function() {
-        // $scope.records.slice(0, $scope.records.lengthasd);
-        // $scope.records.splice( 0, 1 );
-        $http.get('http://testbed.com/removerecordsall');
-      }
     });
   </script>
 </body>
