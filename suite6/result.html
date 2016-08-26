@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+  <div class="container" ng-controller="customersCtrl">
+    <h3>Tracking results</h3>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Tracker</th>
+          <th>UID</th>
+          <th>Refer Record</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="record in records">
+        <td ng-repeat="(key, val) in record" ng-if="$index > 0 && !$last"> {{val}}</td>
+        <!--td>{{record.timestamp}}</td-->
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="container" ng-controller="customersCtrl">
+    <button class="btn" ng-click="clearall()">clear history</button>
+  </div>
+  <script>
+    var app = angular.module('myApp', []);
+    app.controller('customersCtrl', function($scope, $http) {
+      var url = "http://api.testbed.com/test/record/";
+      var tracker_id = window.name; // use hack to set tracker id in tracker's domain
+      var tracker_name = "tke";
+      $http.jsonp(url+"?jsonp=JSON_CALLBACK"+"&filter_name="+tracker_name+"&filter_uid="+tracker_id).success(function(data) {
+        $scope.records = data.rows;
+      });
+    });
+  </script>
+</body>
+</html>
